@@ -26,6 +26,7 @@ services:
 ##########################
     mysqlmaster:
         image: mysql:5.7
+		restart: always
         environment:
             - MYSQL_ROOT_PASSWORD=root
         networks:
@@ -38,6 +39,7 @@ services:
 ##########################
     mysqlslave:
         image: mysql:5.7
+		restart: always
         environment:
             - MYSQL_ROOT_PASSWORD=root
         networks:
@@ -50,6 +52,9 @@ services:
 ##########################
     mysqlconfigure:
         image: mysql:5.7
+		depends_on:
+            - mysqlmaster
+			- mysqlslave
         environment:
             - MYSQL_SLAVE_PASSWORD=root
             - MYSQL_MASTER_PASSWORD=root
@@ -60,5 +65,6 @@ services:
             - back_end
         volumes:
             - ./config/mysql_connector.sh:/tmp/mysql_connector.sh
+			- ./config/create.sql
         command: /bin/bash -x /tmp/mysql_connector.sh
 
