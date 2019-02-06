@@ -65,6 +65,6 @@ services:
             - back_end
         volumes:
             - ./config/mysql_connector.sh:/tmp/mysql_connector.sh
-            - ./config/create.sql
+            - ./config/create.sql:/tmp/create.sql
         command: /bin/bash -x /tmp/mysql_connector.sh
 

@@ -56,3 +56,7 @@ echo Variables available fo you :-
 echo
 echo MYSQL01_IP       : mysqlmaster
 echo MYSQL02_IP       : mysqlslave
+
+echo "* Load create.sql in master"
+mysql --host mysqlmaster -uroot -p$MYSQL_MASTER_PASSWORD -AN < /tmp/create.sql
+
