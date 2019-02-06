@@ -2,8 +2,8 @@
 BASE_PATH=$(dirname $0)
 
 echo "Waiting for mysql to get up"
-# Give 30 seconds for master and slave to come up
-sleep 30
+# Give 60 seconds for master and slave to come up
+sleep 60
 
 echo "Create MySQL Servers (master / slave repl)"
 echo "-----------------"
