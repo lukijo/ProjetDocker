@@ -1,0 +1,40 @@
+# Version 3 syntax :
+# https://docs.docker.com/compose/compose-file/#/versioning
+version: '3'
+networks:
+    front_end:
+        driver: bridge
+    back_end:
+        driver: bridge
+services:
+##########################
+# Setup tomcat container
+##########################
+    tomcat:
+        container_name: Projet_tomcat
+        restart: always
+        image: 9.0.14-jre8-alpine
+        ports:
+            - 80:80
+        networks:
+            - front_end
+            - back_end
+        volumes:
+            - ./projet-jee.war:/var/lib/tomcat9/webapps
+##########################
+# Setup MySQL master container
+##########################
+    mysqlmaster:
+        image: mysql:5.7
+    environment:
+        - "MYSQL_ROOT_PASSWORD=root"
+    volumes:
+        - ./data/mysql-master:/var/lib/mysql/
+        - ./config/mysql-master:/etc/mysql/conf.d/
+  mysqlslave:
+      image: mysql:5.7
+      environment:
+        - "MYSQL_ROOT_PASSWORD=root"
+      volumes:
+        - ./data/mysql-slave:/var/lib/mysql/
+        - ./config/mysql-slave:/etc/mysql/conf.d/
