@@ -27,7 +27,7 @@ services:
     mysqlmaster:
         image: mysql:5.7
         environment:
-            - "MYSQL_ROOT_PASSWORD=root"
+            - MYSQL_ROOT_PASSWORD=root
         networks:
             - back_end
         volumes:
@@ -39,7 +39,7 @@ services:
     mysqlslave:
         image: mysql:5.7
         environment:
-            - "MYSQL_ROOT_PASSWORD=root"
+            - MYSQL_ROOT_PASSWORD=root
         networks:
             - back_end
         volumes:
@@ -51,11 +51,11 @@ services:
     mysqlconfigure:
         image: mysql:5.7
         environment:
-            - "MYSQL_SLAVE_PASSWORD=root"
-            - "MYSQL_MASTER_PASSWORD=root"
-            - "MYSQL_ROOT_PASSWORD=root"
-            - "MYSQL_REPLICATION_USER=repl"
-            - "MYSQL_REPLICATION_PASSWORD=repl"
+            - MYSQL_SLAVE_PASSWORD=root
+            - MYSQL_MASTER_PASSWORD=root
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_REPLICATION_USER=repl
+            - MYSQL_REPLICATION_PASSWORD=repl
         networks:
             - back_end
         volumes:
